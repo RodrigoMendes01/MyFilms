@@ -1,0 +1,34 @@
+.star-rating {
+  display: flex;
+  direction: row;
+  font-size: 20px;
+}
+
+.star {
+  cursor: pointer;
+  color: #f39c12
+}
+
+.custom-image {
+  display: flex;
+  width: 50%;
+}
+
+.custom-form-container {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5em;
+}
+
+@media (max-width: 1000px) {
+  .custom-image {
+    display: none;
+  }
+
+  .custom-form-container {
+    width: 100%;
+  }
+}

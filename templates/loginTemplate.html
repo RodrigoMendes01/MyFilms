@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="../static/img/logo-filmes.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../static/bootstrap.css">
+  <link rel="stylesheet" href="../static/css/index.css">
+  <title>+Filmes</title>
+</head>
+<body>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{category}} alert-dismissible fade show position-fixed top-0 mt-3 start-50 translate-middle-x z-3" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+  {% endwith %}
+  <main class="d-flex flex-row min-vh-100 bg-light">
+    <div class="custom-form-container">
+      <div class="d-flex flex-column align-items-center justify-content-center">
+        <img src="../static/img/logo-filmes.svg" class="w-25" alt="Logo + Filmes">
+        <div class="d-flex flex-column align-items-center mt-2">
+          <span class="text-secondary-emphasis fs-3 fw-medium">Bem-vindo a <span class="text-danger">+</span>Filmes</span>
+          <span>Seu cantinho de filmes assistidos!</span>
+        </div>
+      </div>
+
+      <div class="w-75">
+        {% block views %} {% endblock %}
+      </div>
+    </div>
+
+    <div class="custom-image d-flex align-items-center justify-content-center">
+      <img src="../static/img/imgLogin.jpg" class="img-fluid h-100" alt="Imagem gêneros de filmes">
+    </div>
+  </main>
+</body>
+</html>

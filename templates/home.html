@@ -1,0 +1,124 @@
+{% extends "homeTemplate.html" %}
+
+{% block views %}
+  <main class="p-4 d-flex flex-column gap-4 align-items-center justify-content-center">
+    <div class="block">
+      <button type="button" class="btn btn-danger fw-medium" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <img src="../static/img/Plus.svg" class="me-2" alt="">
+        Adicionar filme
+      </button>
+
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Cadastrar um novo filme</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="/insert" id="new-movie" enctype="multipart/form-data" method="POST">
+                <div class="form-floating my-3">
+                  <input type="text" class="form-control" name="name" placeholder="Digite aqui..." required>
+
+                  <label for="floatingInput">Título</label>
+                </div>
+
+                <div class="form-floating my-3">
+                  <textarea class="form-control" placeholder="Digite aqui..." name="commentary" style="height: 150px" required></textarea>
+
+                  <label for="floatingTextarea2">Comentários</label>
+                </div>
+
+                <div class="form-floating my-3">
+                  <input type="number" class="form-control" name="rating" placeholder="Digite aqui..." max="5" required>
+      
+                  <label for="rating">Nota</label>
+                </div>
+
+                <div class="form-floating my-3">
+                  <input type="number" class="form-control" name="times_watched" placeholder="Digite aqui..." required>
+      
+                  <label for="rating">Vezes assistido</label>
+                </div>
+
+                <div class="my-3 gap-5">
+                  <label for="">Recomendaria?</label>
+
+                  <div class="d-flex gap-2">
+                    <div class="input-group">
+                      <div class="input-group-text">
+                        <input class="form-check-input mt-0" name="recommend" type="radio" value="1" aria-label="Radio button for following text input" required>
+                      </div>
+                      <span class="form-control">Sim</span>
+                    </div>
+    
+                    <div class="input-group">
+                      <div class="input-group-text">
+                        <input class="form-check-input mt-0" name="recommend" type="radio" value="0" aria-label="Radio button for following text input" required>
+                      </div>
+                      <span class="form-control">Não</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <input type="file" class="form-control" name="image" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
+                </div>
+
+                <div class="d-flex justify-content-end my-3">
+                  <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Cadastrar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row row-cols-auto justify-content-between px-5 gap-5">
+      {% for movie in movies %}
+        <div class="card px-0 shadow" style="width: 15rem; height: fit-content;">
+          <img src="{{ url_for('static', filename='uploads/' + movie.image) }}" class="rounded-top card-img-top" alt='{{ movie.name }}'>
+          <div class="card-body">
+            <h5 class="card-title text-truncate">{{ movie.name }}</h5>
+
+            {% if movie.rating == 1 %}
+                <div class="star-rating">
+                    <span class="star">&#9733;</span>
+                </div>
+            {% elif movie.rating == 2 %}
+                <div class="star-rating">
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                </div>
+            {% elif movie.rating == 3 %}
+                <div class="star-rating">
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                </div>
+            {% elif movie.rating == 4 %}
+                <div class="star-rating">
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                </div>
+            {% else %}
+                <div class="star-rating">
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                </div>
+            {% endif %}
+
+            <p class="card-text text-truncate">{{ movie.commentary }}</p>
+            <a href="{{url_for('movie_details', id = movie.id)}}" class="btn btn-danger">Ver mais</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </main>
+{% endblock %}

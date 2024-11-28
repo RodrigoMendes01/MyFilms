@@ -1,0 +1,30 @@
+{% extends "loginTemplate.html" %}
+
+{% block views %}
+  <form action="/create_user" method="post">
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="name" placeholder="Nome" required>
+
+        <label for="floatingInput">Nome</label>
+    </div>
+
+  <div class="form-floating mb-3">
+        <input type="email" class="form-control" name="email" placeholder="name@example.com" required>
+
+        <label for="floatingInput">E-mail</label>
+  </div>
+
+  <div class="form-floating">
+        <input type="password" class="form-control" name="password" placeholder="Senha" required>
+        <label for="floatingPassword">Senha</label>
+  </div>
+
+  <div class="mt-4">
+    <span class="fw-medium">Já possui uma conta? <a class="text-decoration-underline text-danger pe-auto" href="/login">acessar-a</a></span>
+  </div>
+
+  <div class="mt-5">
+        <button class="btn btn-dark w-100 fw-medium p-2">Cadastrar</button>
+  </div>
+  </form>
+{% endblock %}
